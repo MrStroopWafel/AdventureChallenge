@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 using AdventureChallenge.Models;
+using Newtonsoft.Json;
 
 namespace AdventureChallenge.Controllers
 {
@@ -18,10 +20,27 @@ namespace AdventureChallenge.Controllers
             _context = context;
         }
 
-        // GET: Users
+        // User login
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Users.ToListAsync());
+            return View();
+        }
+        //verification for the login
+        [HttpPost, ActionName("Login")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Verificatie(string Email, string? Wachtwoord)
+        {
+            if (Email != null || Wachtwoord != null)
+            {
+                var user = _context.Users.Where(u => u.Email.Contains(Email)).FirstOrDefault();
+                if (user == null)
+                {
+                    return View("Index");
+                }
+                HttpContext.Session.SetString("user", JsonConvert.SerializeObject(user));
+                return View("../Challenge/Index");
+            }
+            return View("Index");
         }
 
         // GET: Users/Details/5

@@ -1,5 +1,6 @@
 ﻿using AdventureChallenge.Models;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Diagnostics;
 
 namespace AdventureChallenge.Controllers
@@ -15,6 +16,8 @@ namespace AdventureChallenge.Controllers
 
         public IActionResult Index()
         {
+            User user = JsonConvert.DeserializeObject<User>(HttpContext.Session.GetString("User"));
+
             return View();
         }
 
