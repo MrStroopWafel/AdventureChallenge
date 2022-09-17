@@ -9,85 +9,85 @@ using AdventureChallenge.Models;
 
 namespace AdventureChallenge.Controllers
 {
-    public class UsersController : Controller
+    public class ChallengeController : Controller
     {
         private readonly AdventureChallengeContext _context;
 
-        public UsersController(AdventureChallengeContext context)
+        public ChallengeController(AdventureChallengeContext context)
         {
             _context = context;
         }
 
-        // GET: Users
+        // GET: Challenges
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Users.ToListAsync());
+            return View(await _context.Challenges.ToListAsync());
         }
 
-        // GET: Users/Details/5
+        // GET: Challenges/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Users == null)
+            if (id == null || _context.Challenges == null)
             {
                 return NotFound();
             }
 
-            var user = await _context.Users
+            var challenge = await _context.Challenges
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (user == null)
+            if (challenge == null)
             {
                 return NotFound();
             }
 
-            return View(user);
+            return View(challenge);
         }
 
-        // GET: Users/Create
+        // GET: Challenges/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Users/Create
+        // POST: Challenges/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Naam,Email,Wachtwoord,Beheer")] User user)
+        public async Task<IActionResult> Create([Bind("Id,Prijs,Tijdstip,Personen,Status")] Challenge challenge)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(user);
+                _context.Add(challenge);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(user);
+            return View(challenge);
         }
 
-        // GET: Users/Edit/5
+        // GET: Challenges/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Users == null)
+            if (id == null || _context.Challenges == null)
             {
                 return NotFound();
             }
 
-            var user = await _context.Users.FindAsync(id);
-            if (user == null)
+            var challenge = await _context.Challenges.FindAsync(id);
+            if (challenge == null)
             {
                 return NotFound();
             }
-            return View(user);
+            return View(challenge);
         }
 
-        // POST: Users/Edit/5
+        // POST: Challenges/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Naam,Email,Wachtwoord,Beheer")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Prijs,Tijdstip,Personen,Status")] Challenge challenge)
         {
-            if (id != user.Id)
+            if (id != challenge.Id)
             {
                 return NotFound();
             }
@@ -96,12 +96,12 @@ namespace AdventureChallenge.Controllers
             {
                 try
                 {
-                    _context.Update(user);
+                    _context.Update(challenge);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UserExists(user.Id))
+                    if (!ChallengeExists(challenge.Id))
                     {
                         return NotFound();
                     }
@@ -112,49 +112,49 @@ namespace AdventureChallenge.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(user);
+            return View(challenge);
         }
 
-        // GET: Users/Delete/5
+        // GET: Challenges/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Users == null)
+            if (id == null || _context.Challenges == null)
             {
                 return NotFound();
             }
 
-            var user = await _context.Users
+            var challenge = await _context.Challenges
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (user == null)
+            if (challenge == null)
             {
                 return NotFound();
             }
 
-            return View(user);
+            return View(challenge);
         }
 
-        // POST: Users/Delete/5
+        // POST: Challenges/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Users == null)
+            if (_context.Challenges == null)
             {
-                return Problem("Entity set 'AdventureChallengeContext.Users'  is null.");
+                return Problem("Entity set 'AdventureChallengeContext.Challenges'  is null.");
             }
-            var user = await _context.Users.FindAsync(id);
-            if (user != null)
+            var challenge = await _context.Challenges.FindAsync(id);
+            if (challenge != null)
             {
-                _context.Users.Remove(user);
+                _context.Challenges.Remove(challenge);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool UserExists(int id)
+        private bool ChallengeExists(int id)
         {
-          return _context.Users.Any(e => e.Id == id);
+            return _context.Challenges.Any(e => e.Id == id);
         }
     }
 }
