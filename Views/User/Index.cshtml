@@ -1,40 +1,54 @@
-﻿@model AdventureChallenge.Models.User
+﻿@model IEnumerable<AdventureChallenge.Models.User>
+
 @{
-    ViewData["Title"] = "Login";
+    ViewData["Title"] = "Index";
 }
 
-<h1>Login</h1>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Login">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Wachtwoord" class="control-label"></label>
-                <input asp-for="Wachtwoord" class="form-control" />
-                <span asp-validation-for="Wachtwoord" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Login" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
-@Html.ValidationMessage("CustomError")
-<div>
-    
-        <!-- HttpContext.Session.GetString("user") != null ? <a asp-controller="Home" asp-action="Index">Terug naar Home</a> :   
-            Is het mogelijk om hier een shorthand if statement te maken die een knof kan weergeven op basis van een session?
-        --> 
-</div>
+<h1>Index</h1>
 
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-    }
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Naam)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Wachtwoord)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Beheer)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+                <tr>
+                    <td>
+                    @Html.DisplayFor(modelItem => item.Naam)
+                    </td>
+                    <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                    @Html.DisplayFor(modelItem => item.Wachtwoord)
+                    </td>
+                    <td>
+                    @Html.DisplayFor(modelItem => item.Beheer)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+        }
+    </tbody>
+</table>
