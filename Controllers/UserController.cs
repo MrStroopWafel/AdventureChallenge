@@ -41,6 +41,7 @@ namespace AdventureChallenge.Controllers
                 var user = _context.Users.Where(u => u.Email.Contains(Email)).FirstOrDefault();
                 if (user == null)
                 {
+                    ModelState.AddModelError("CustomError", "Geen email gevonden, probeer opnieuw");
                     return View("Index");
                 }
                 HttpContext.Session.SetString("user", JsonConvert.SerializeObject(user));
