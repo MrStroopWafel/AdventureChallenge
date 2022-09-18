@@ -16,8 +16,6 @@ namespace AdventureChallenge.Controllers
 
         public IActionResult Index()
         {
-            User user = JsonConvert.DeserializeObject<User>(HttpContext.Session.GetString("User"));
-
             return View();
         }
 

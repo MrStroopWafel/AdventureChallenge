@@ -1,5 +1,5 @@
 ﻿@model AdventureChallenge.Models.User
-
+@using Microsoft.AspNetCore.Http;
 @{
     ViewData["Title"] = "Login";
 }
@@ -30,7 +30,9 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+        <!-- HttpContext.Session.GetString("user") != null ? <a asp-controller="Home" asp-action="Index">Terug naar Home</a> :   
+            Is het mogelijk om hier een shorthand if statement te maken die een knof kan weergeven op basis van een session?
+        --> 
 </div>
 
 @section Scripts {

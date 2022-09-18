@@ -23,6 +23,12 @@ namespace AdventureChallenge.Controllers
         // User login
         public async Task<IActionResult> Index()
         {
+
+            if (HttpContext.Session.GetString("user") != null)
+            {
+                var user = JsonConvert.DeserializeObject<User>(HttpContext.Session.GetString("user"));
+                View(user);
+            }
             return View();
         }
         //verification for the login
@@ -38,7 +44,11 @@ namespace AdventureChallenge.Controllers
                     return View("Index");
                 }
                 HttpContext.Session.SetString("user", JsonConvert.SerializeObject(user));
-                return View("../Challenge/Index");
+                /*
+                return new HomeController(null).Index(); // dit opend niks en ik weet niet waarom?
+                return View("../Home/Index"); //Dit opend de goede index file, maar runt de Home controller niet die daarbij nodig is.
+                */
+
             }
             return View("Index");
         }
