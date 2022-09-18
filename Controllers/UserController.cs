@@ -44,11 +44,7 @@ namespace AdventureChallenge.Controllers
                     return View("Index");
                 }
                 HttpContext.Session.SetString("user", JsonConvert.SerializeObject(user));
-                /*
-                return new HomeController(null).Index(); // dit opend niks en ik weet niet waarom?
-                return View("../Home/Index"); //Dit opend de goede index file, maar runt de Home controller niet die daarbij nodig is.
-                */
-
+                return RedirectToAction("Index", "Home");
             }
             return View("Index");
         }
