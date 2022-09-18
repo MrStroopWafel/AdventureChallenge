@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 using AdventureChallenge.Models;
+using Newtonsoft.Json;
 
 namespace AdventureChallenge.Controllers
 {
@@ -17,11 +19,41 @@ namespace AdventureChallenge.Controllers
         {
             _context = context;
         }
-
         // GET: Users
         public async Task<IActionResult> Index()
         {
             return View(await _context.Users.ToListAsync());
+        }
+
+
+        // User login
+        public async Task<IActionResult> Login()
+        {
+
+            if (HttpContext.Session.GetString("user") != null)
+            {
+                var user = JsonConvert.DeserializeObject<User>(HttpContext.Session.GetString("user"));
+                View(user);
+            }
+            return View();
+        }
+        //verification for the login
+        [HttpPost, ActionName("Login")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Verificatie(string Email, string? Wachtwoord)
+        {
+            if (Email != null || Wachtwoord != null)
+            {
+                var user = _context.Users.Where(u => u.Email.Contains(Email)).FirstOrDefault();
+                if (user == null)
+                {
+                    ModelState.AddModelError("CustomError", "Geen email gevonden, probeer opnieuw");
+                    return View("Login");
+                }
+                HttpContext.Session.SetString("user", JsonConvert.SerializeObject(user));
+                return RedirectToAction("Index", "Home");
+            }
+            return View("Login");
         }
 
         // GET: Users/Details/5
