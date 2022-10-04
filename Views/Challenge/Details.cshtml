@@ -1,13 +1,12 @@
-﻿@model AdventureChallenge.Models.Challenge
+﻿@model AdventureChallenge.Models.Challenge 
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Challenge";
 }
 
-<h1>Details</h1>
+<h1 class="text-center">Werk aan de challenge</h1>
 
 <div>
-    <h4>Challenge</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -46,3 +45,59 @@
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
+
+
+<div class="container">
+    <form asp-action="Details" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Id" />
+        <div class="row text-center">
+            <div class="col-md-6">
+                <p class="text-left">Money - tijd van dag - duratie tijd</p>
+                <img class="" src="~/img/black-square.jpg" width="300px">
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <label for="Beschrijving"></label>
+                    <textarea name="Beschrijving" id="Beschrijving" placeholder="Geef een korte samevatting van de ervaring..." rows="4" cols="50"></textarea>
+                </div>
+                <div class="row-md-auto">
+                    <label for="Upload"></label>
+                    <input class="text-center" type="file" name="Upload" id="Upload">
+                </div>
+            </div>
+        </div>
+        <div class="text-center">
+            <input type="submit" value="Afronden" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
