@@ -60,6 +60,14 @@ namespace AdventureChallenge.Controllers
         // User Search function
         public async Task<IActionResult> Search()
         {
+            //gets user session
+            var user = JsonConvert.DeserializeObject<User>(HttpContext.Session.GetString("user"));
+            var challangeId = CheckChallengeStart(user.Id);
+            //check if user has a active challenge; 0 = no active challenge
+            if (challangeId != 0)
+            {
+                return RedirectToAction("Details", "Challenge", new { id = challangeId });
+            }
             return View();
         }
         //Post data from the search form
@@ -67,6 +75,7 @@ namespace AdventureChallenge.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Search(decimal Prijs, string Tijdstip, int Personen, string Status, decimal Tijdduur)
         {
+            //switches to the right database searching field for the given amount of people
             string pAantal;
             switch (Personen)
             {
@@ -86,16 +95,35 @@ namespace AdventureChallenge.Controllers
                     pAantal = null;
                     break;
             }
+            //checks if all data is given
             if (Prijs != null && Tijdstip != null && Personen != null && Status != null && Tijdduur != null)
             {
-                var challenges = _context.Challenges.Where(u => u.Prijs <= Prijs && u.Tijdstip == Tijdstip && u.Personen == pAantal && u.Status == "Actief" && u.Tijdduur <= Tijdduur).FirstOrDefault();
-                if (challenges == null)
+                //querries for a challenge matching the params
+                var challenge = _context.Challenges.Where(u => u.Prijs <= Prijs && u.Tijdstip == Tijdstip && u.Personen == pAantal && u.Status == "Actief" && u.Tijdduur <= Tijdduur).FirstOrDefault();
+                if (challenge == null)
                 {
                     ModelState.AddModelError("CustomError", "Geen challenge voldoet aan gegeven eisen");
-
+                }
+                else
+                {
+                    var user = JsonConvert.DeserializeObject<User>(HttpContext.Session.GetString("user"));
+                    //creates a userChallenge 
+                    var userChallenge = new UserChallenge { Id = 0, UserId = user.Id, ChallengeId = challenge.Id, Beschrijving = null, FotoId = null, Afgerond = false };
+                    _context.Add(userChallenge);
+                    _context.SaveChanges();
+                    return RedirectToAction("Details", "Challenge", new { challenge.Id });
                 }
             }
             return View();
+        }
+        private int CheckChallengeStart(int id)
+        {
+            var challenge = _context.UserChallenges.Where(u => u.UserId == id && !u.Afgerond).FirstOrDefault();
+            if (challenge != null)
+            {
+                return challenge.ChallengeId;
+            }
+            return 0;
         }
 
 

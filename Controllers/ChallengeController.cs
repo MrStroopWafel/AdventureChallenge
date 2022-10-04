@@ -42,6 +42,53 @@ namespace AdventureChallenge.Controllers
             return View(challenge);
         }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         // GET: Challenges/Create
         public IActionResult Create()
         {

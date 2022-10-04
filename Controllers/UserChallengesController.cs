@@ -46,6 +46,32 @@ namespace AdventureChallenge.Controllers
             return View(userChallenge);
         }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         // GET: UserChallenges/Create
         public IActionResult Create()
         {
@@ -166,14 +192,14 @@ namespace AdventureChallenge.Controllers
             {
                 _context.UserChallenges.Remove(userChallenge);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool UserChallengeExists(int id)
         {
-          return _context.UserChallenges.Any(e => e.Id == id);
+            return _context.UserChallenges.Any(e => e.Id == id);
         }
     }
 }
