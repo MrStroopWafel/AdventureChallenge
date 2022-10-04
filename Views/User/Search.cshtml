@@ -1,24 +1,24 @@
 ﻿@model AdventureChallenge.Models.Challenge
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Search";
 }
 
-<h1>Create</h1>
+<h1 class="text-center">Zoek een challenge</h1>
 
-<h4>Challenge</h4>
 <hr />
+
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Search">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Prijs" class="control-label"></label>
-                <input asp-for="Prijs" class="form-control" />
+                <label asp-for="Prijs" class="control-label">Maximale prijs</label>
+                <input asp-for="Prijs" class="form-control" placeholder="€"/>
                 <span asp-validation-for="Prijs" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Tijdstip" class="control-label"></label>
+                <label asp-for="Tijdstip" class="control-label">Tijdstip uitvoering</label>
                 <select asp-for="Tijdstip" class="form-control">
                     <option value="'s Ochtends">'s Ochtends</option>
                     <option value="'s Middags">'s Middags</option>
@@ -28,40 +28,34 @@
                 <span asp-validation-for="Tijdstip" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Personen" class="control-label"></label>
-                <select asp-for="Personen" class="form-control">
-                    <option value="1">1 persoon</option>
-                    <option value="2">2 personen</option>
-                    <option value="3-4">3-4 personen</option>
-                    <option value=">4">>4 personen</option>
-                </select>
+                <label asp-for="Personen" class="control-label">Aantal personen</label>
+                <input asp-for="Personen" class="form-control" type="number" min="1" step="1"/>
                 <span asp-validation-for="Personen" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Status" class="control-label"></label>
-                <select asp-for="Status" class="form-control">
-                    <option value="Keuring">Keuring</option>
-                    <option value="Actief">Actief</option>
-                    <option value="Afgekeurd">Afgekeurd</option>
-                </select>
+                <input asp-for="Status" type="hidden" class="form-control" value="Goedgekeurd" />
                 <span asp-validation-for="Status" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Tijdduur" class="control-label">Tijds duur in uren</label>
+                <label asp-for="Tijdduur" class="control-label">Tijds duur in hele uren</label>
                 <input asp-for="Tijdduur" class="form-control" type="number" min="0.5" step="0.5"/>
                 <span asp-validation-for="Tijdduur" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Search" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
+@Html.ValidationMessage("CustomError")
+
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-controller="Home" asp-action="Index">Back to Home</a>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

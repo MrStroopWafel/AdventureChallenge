@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
 using AdventureChallenge.Models;
 using Newtonsoft.Json;
+using System.Linq.Expressions;
 
 namespace AdventureChallenge.Controllers
 {
@@ -19,12 +20,12 @@ namespace AdventureChallenge.Controllers
         {
             _context = context;
         }
+
         // GET: Users
         public async Task<IActionResult> Index()
         {
             return View(await _context.Users.ToListAsync());
         }
-
 
         // User login
         public async Task<IActionResult> Login()
@@ -55,6 +56,105 @@ namespace AdventureChallenge.Controllers
             }
             return View("Login");
         }
+
+        // User Search function
+        public async Task<IActionResult> Search()
+        {
+            return View();
+        }
+        //Post data from the search form
+        [HttpPost, ActionName("Search")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Search(decimal Prijs, string Tijdstip, int Personen, string Status, decimal Tijdduur)
+        {
+            string pAantal;
+            switch (Personen)
+            {
+                case 1:
+                    pAantal = "1";
+                    break;
+                case 2:
+                    pAantal = "2";
+                    break;
+                case <= 4:
+                    pAantal = "3-4";
+                    break;
+                case > 4:
+                    pAantal = ">4";
+                    break;
+                default:
+                    pAantal = null;
+                    break;
+            }
+            if (Prijs != null && Tijdstip != null && Personen != null && Status != null && Tijdduur != null)
+            {
+                var challenges = _context.Challenges.Where(u => u.Prijs <= Prijs && u.Tijdstip == Tijdstip && u.Personen == pAantal && u.Status == "Actief" && u.Tijdduur <= Tijdduur).FirstOrDefault();
+                if (challenges == null)
+                {
+                    ModelState.AddModelError("CustomError", "Geen challenge voldoet aan gegeven eisen");
+
+                }
+            }
+            return View();
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         // GET: Users/Details/5
         public async Task<IActionResult> Details(int? id)

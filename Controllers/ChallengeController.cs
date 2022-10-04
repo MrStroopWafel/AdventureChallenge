@@ -53,7 +53,7 @@ namespace AdventureChallenge.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Prijs,Tijdstip,Personen,Status")] Challenge challenge)
+        public async Task<IActionResult> Create([Bind("Id,Prijs,Tijdstip,Personen,Status,Tijdduur")] Challenge challenge)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace AdventureChallenge.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Prijs,Tijdstip,Personen,Status")] Challenge challenge)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Prijs,Tijdstip,Personen,Status,Tijdduur")] Challenge challenge)
         {
             if (id != challenge.Id)
             {
