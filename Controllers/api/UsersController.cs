@@ -11,23 +11,23 @@ namespace AdventureChallenge.Controllers.api
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersControllerAPI : ControllerBase
+    public class UsersController : ControllerBase
     {
         private readonly AdventureChallengeContext _context;
 
-        public UsersControllerAPI(AdventureChallengeContext context)
+        public UsersController(AdventureChallengeContext context)
         {
             _context = context;
         }
 
-        // GET: api/UsersControllerAPI
+        // GET: api/Users
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
             return await _context.Users.ToListAsync();
         }
 
-        // GET: api/UsersControllerAPI/5
+        // GET: api/Users/5
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
@@ -41,7 +41,7 @@ namespace AdventureChallenge.Controllers.api
             return user;
         }
 
-        // PUT: api/UsersControllerAPI/5
+        // PUT: api/Users/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUser(int id, User user)
@@ -72,7 +72,7 @@ namespace AdventureChallenge.Controllers.api
             return NoContent();
         }
 
-        // POST: api/UsersControllerAPI
+        // POST: api/Users
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
@@ -83,7 +83,7 @@ namespace AdventureChallenge.Controllers.api
             return CreatedAtAction("GetUser", new { id = user.Id }, user);
         }
 
-        // DELETE: api/UsersControllerAPI/5
+        // DELETE: api/Users/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {
