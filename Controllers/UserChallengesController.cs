@@ -71,7 +71,6 @@ namespace AdventureChallenge.Controllers
 
 
 
-
         // GET: UserChallenges/Create
         public IActionResult Create()
         {
@@ -99,6 +98,9 @@ namespace AdventureChallenge.Controllers
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", userChallenge.UserId);
             return View(userChallenge);
         }
+
+
+
 
         // GET: UserChallenges/Edit/5
         public async Task<IActionResult> Edit(int? id)

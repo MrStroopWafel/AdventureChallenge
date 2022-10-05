@@ -111,6 +111,13 @@ namespace AdventureChallenge.Controllers
             return View(challenge);
         }
 
+
+
+
+
+
+
+
         // GET: Challenges/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -161,6 +168,13 @@ namespace AdventureChallenge.Controllers
             }
             return View(challenge);
         }
+
+
+
+
+
+
+
 
         // GET: Challenges/Delete/5
         public async Task<IActionResult> Delete(int? id)

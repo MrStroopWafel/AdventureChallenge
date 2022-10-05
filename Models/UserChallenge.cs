@@ -12,8 +12,8 @@ namespace AdventureChallenge.Models
         public int? FotoId { get; set; }
         public bool Afgerond { get; set; }
 
-        public virtual Challenge Challenge { get; set; } = null!;
+        public virtual Challenge? Challenge { get; set; }
         public virtual Foto? Foto { get; set; }
-        public virtual User User { get; set; } = null!;
+        public virtual User? User { get; set; }
     }
 }

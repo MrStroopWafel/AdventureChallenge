@@ -98,8 +98,11 @@ namespace AdventureChallenge.Controllers
             //checks if all data is given
             if (Prijs != null && Tijdstip != null && Personen != null && Status != null && Tijdduur != null)
             {
+                var searchterm = "test123";
                 //querries for a challenge matching the params
                 var challenge = _context.Challenges.Where(u => u.Prijs <= Prijs && u.Tijdstip == Tijdstip && u.Personen == pAantal && u.Status == "Actief" && u.Tijdduur <= Tijdduur).FirstOrDefault();
+                //var challenge = _context.Challenges.Where(c => c.ChallengeHints.Any(ch => ch.Hint.Beschrijving != null && ch.Hint.Beschrijving.Contains(searchterm))).FirstOrDefault();
+                //_context.Database.ExecuteSqlRaw()
                 if (challenge == null)
                 {
                     ModelState.AddModelError("CustomError", "Geen challenge voldoet aan gegeven eisen");
