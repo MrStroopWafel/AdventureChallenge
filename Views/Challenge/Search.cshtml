@@ -1,0 +1,105 @@
+﻿@model AdventureChallenge.Models.FormModels.SearchForm 
+
+@{
+    ViewData["Title"] = "Search";
+}
+
+<h1 class="text-center">Zoek een challenge</h1>
+
+<hr />
+
+<div class="row justify-content-md-center">
+    <div class="col-md-4 justify-content-md-center">
+        <form asp-action="Search">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group ">
+                <label asp-for="Prijs" class="control-label">Maximale prijs</label>
+                <input asp-for="Prijs" class="form-control" placeholder="€"/>
+                <span asp-validation-for="Prijs" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tijdstip" class="control-label">Tijdstip uitvoering</label>
+                <select asp-for="Tijdstip" class="form-control">
+                    <option value="'s Ochtends">'s Ochtends</option>
+                    <option value="'s Middags">'s Middags</option>
+                    <option value="'s Avonds">'s Avonds</option>
+                    <option value="'s Nachts">'s Nachts</option>
+                </select>
+                <span asp-validation-for="Tijdstip" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Personen" class="control-label">Aantal personen</label>
+                <input asp-for="Personen" class="form-control" type="number" min="1" step="1"/>
+                <span asp-validation-for="Personen" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="Status" type="hidden" class="form-control" value="Goedgekeurd" />
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tijdduur" class="control-label">Tijds duur in hele uren</label>
+                <input asp-for="Tijdduur" class="form-control" type="number" min="0.5" step="0.5"/>
+                <span asp-validation-for="Tijdduur" class="text-danger"></span>
+            </div>
+            <div class="container">
+                <div class="row justify-content-md-center">
+                    <div class="form-group form-check col-3">
+                        <label class="form-check-label" asp-for="Icon0"><i class="fa-solid fa-person-hiking" id="Icon0"></i></label>
+                        <input class="form-check-input" asp-for="Icon0"id="checkbox"/>
+                    </div>
+                    <div class="form-group form-check col-3">
+                        <label class="form-check-label" asp-for="Icon1"><i class="fa-solid fa-handshake-angle" id="Icon1"></i></label>
+                        <input class="form-check-input" asp-for="Icon1"id="checkbox"/>
+                    </div>
+                    <div class="form-group form-check col-3">
+                        <label class="form-check-label" asp-for="Icon2"><i class="fa-solid fa-bus" id="Icon2"></i></label>
+                        <input class="form-check-input" asp-for="Icon2"id="checkbox"/>
+                    </div>
+                </div>
+                <div class="row justify-content-md-center">
+                    <div class="form-group form-check col-3">
+                        <label class="form-check-label" asp-for="Icon3"><i class="fa-solid fa-stopwatch"></i></label>
+                        <input class="form-check-input" asp-for="Icon3" id="checkbox"/>
+                    </div>
+                    <div class="form-group form-check col-3">
+                        <label class="form-check-label" asp-for="Icon4"><i class="fa-solid fa-otter" id="Icon4"></i></label>
+                        <input class="form-check-input" asp-for="Icon4" id="checkbox"/>
+                    </div>
+                    <div class="form-group form-check col-3">
+                        <label class="form-check-label" asp-for="Icon5"><i class="fa-solid fa-spoon" id="Icon5"></i></label>
+                        <input class="form-check-input" asp-for="Icon5"/>
+                    </div>
+                </div>
+                <div class="row justify-content-md-center">
+                    <div class="form-group form-check col-3">
+                        <label class="form-check-label" asp-for="Icon6"><i class="fa-solid fa-temperature-arrow-down" id="Icon6"></i></label>
+                        <input class="form-check-input" asp-for="Icon6"/>
+                    </div>
+                    <div class="form-group form-check col-3">
+                        <label class="form-check-label" asp-for="Icon7"><i class="fa-solid fa-temperature-arrow-up" id="Icon7"></i></label>
+                        <input class="form-check-input" asp-for="Icon7"/>
+                    </div>
+                    <div class="form-group form-check col-3">
+                        <label class="form-check-label" asp-for="Icon8"><i class="fa-solid fa-brain" id="Icon8"></i></label>
+                        <input class="form-check-input" asp-for="Icon8"/>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group text-center" id="button">
+                <input type="submit" value="Search" class="btn btn-primary " />
+            </div>
+        </form>
+    </div>
+</div>
+
+@Html.ValidationMessage("CustomError")
+
+<div class="row justify-content-md-center">
+    <a asp-controller="Home" asp-action="Index" class="text-center">Back to Home</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

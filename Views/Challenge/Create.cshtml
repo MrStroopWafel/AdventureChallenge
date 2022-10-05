@@ -12,6 +12,7 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Status" value="Keuring"/>
             <div class="form-group">
                 <label asp-for="Prijs" class="control-label"></label>
                 <input asp-for="Prijs" class="form-control" />
@@ -37,6 +38,7 @@
                 </select>
                 <span asp-validation-for="Personen" class="text-danger"></span>
             </div>
+            <!--
             <div class="form-group">
                 <label asp-for="Status" class="control-label"></label>
                 <select asp-for="Status" class="form-control">
@@ -46,6 +48,7 @@
                 </select>
                 <span asp-validation-for="Status" class="text-danger"></span>
             </div>
+            -->
             <div class="form-group">
                 <label asp-for="Tijdduur" class="control-label">Tijds duur in uren</label>
                 <input asp-for="Tijdduur" class="form-control" type="number" min="0.5" step="0.5"/>

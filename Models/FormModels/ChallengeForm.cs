@@ -1,13 +1,8 @@
-﻿using Microsoft.Build.Framework;
-using System;
-using System.Collections.Generic;
-using Xunit;
-
-namespace AdventureChallenge.Models
+﻿namespace AdventureChallenge.Models.FormModels
 {
-    public partial class Challenge
+    public class ChallengeForm
     {
-        public Challenge()
+        public ChallengeForm()
         {
             ChallengeHints = new HashSet<ChallengeHint>();
             UserChallenges = new HashSet<UserChallenge>();
@@ -19,6 +14,9 @@ namespace AdventureChallenge.Models
         public string Personen { get; set; }
         public string Status { get; set; }
         public decimal Tijdduur { get; set; }
+        public string Beschrijving { get; set; }
+        public System.Drawing.Image? Image { get; set; }
+        public List<Hint>? hints { get; set; }
 
         public virtual ICollection<ChallengeHint> ChallengeHints { get; set; }
         public virtual ICollection<UserChallenge> UserChallenges { get; set; }
