@@ -3,23 +3,33 @@ using System;
 using System.Collections.Generic;
 using Xunit;
 
-namespace AdventureChallenge.Models
+namespace AdventureChallenge.Models.FormModels
 {
-    public partial class Challenge
+    public class SearchForm
     {
-        public Challenge()
+        public SearchForm()
         {
             ChallengeHints = new HashSet<ChallengeHint>();
             UserChallenges = new HashSet<UserChallenge>();
         }
 
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public decimal Prijs { get; set; }
         public string Tijdstip { get; set; }
-        public string Personen { get; set; }
+        public int Personen { get; set; }
         public string Status { get; set; }
         public decimal Tijdduur { get; set; }
-        public string Opdracht { get; set; }
+        public string? Opdracht { get; set; }
+        public bool Icon0 { get; set; }
+        public bool Icon1 { get; set; }
+        public bool Icon2 { get; set; }
+        public bool Icon3 { get; set; }
+        public bool Icon4 { get; set; }
+        public bool Icon5 { get; set; }
+        public bool Icon6 { get; set; }
+        public bool Icon7 { get; set; }
+        public bool Icon8 { get; set; }
+
 
         public virtual ICollection<ChallengeHint> ChallengeHints { get; set; }
         public virtual ICollection<UserChallenge> UserChallenges { get; set; }

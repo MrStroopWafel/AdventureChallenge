@@ -1,42 +1,89 @@
-﻿@model AdventureChallenge.Models.Challenge
+﻿@model AdventureChallenge.Models.FormModels.ChallengeForm 
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Challenge";
 }
 
-<h1>Details</h1>
+<h1 class="text-center">Werk aan de challenge</h1>
+<hr />
 
-<div>
-    <h4>Challenge</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Prijs)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Prijs)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Tijdstip)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Tijdstip)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Personen)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Personen)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-    </dl>
+
+<div class="container" id="icons">
+    <form asp-action="Details">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="ChallengeId" />
+        <input type="hidden" asp-for="Prijs" />
+        <input type="hidden" asp-for="Tijdstip" />
+        <input type="hidden" asp-for="Personen" />
+        <input type="hidden" asp-for="Tijdduur" />
+        <input type="hidden" asp-for="Opdracht" />
+        <input type="hidden" asp-for="Hints" />
+        <input type="hidden" asp-for="UserId" />
+        <input type="hidden" asp-for="Afgerond" />
+        <div class="row justify-content-md-center">
+            <div class="col" id="box">
+                <p class="text-left" id="challengeInf">€@Model?.Prijs - @Model?.Tijdstip - @Model?.Tijdduur uur - @Model?.Personen deelnemer(s)</p>
+                <div class="row">
+                    <div class="imageText">
+                        <img class="img" src="~/img/black-square.jpg"> 
+                        <p class="middel-text">@Model?.Opdracht</p>
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class="col-1" id="icons">
+                @{
+                    foreach (var hint in Model.Hints)
+                    {
+                                <div class="row-sm-2">
+                                    <i class="@hint.FontIcoon"></i>
+                                </div>
+                    }
+                }
+            </div>
+
+            <div class="col justify-content-md-center">
+                <div class="row form-group">
+                    <textarea asp-for="Beschrijving" class="form-control" placeholder="geef hier een korte samenvatting..." required></textarea>
+                    <span asp-validation-for="Beschrijving" class="text-danger"></span>
+                </div>
+                <div class="row-md-auto">
+                    <input asp-for="Foto" class="form-control" type="file" id="Upload" required>
+                </div>
+            </div>
+        </div>
+        <div class="form-group text-center" id="button">
+                <input type="submit" value="Save" class="btn btn-primary" />
+        </div>
+    </form>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

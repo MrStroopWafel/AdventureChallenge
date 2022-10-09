@@ -4,17 +4,17 @@
     ViewData["Title"] = "Search";
 }
 
-<h1 class="text-center">Maak een challenge voostel</h1>
+<h1 class="text-center">Zoek een challenge</h1>
 
 <hr />
 
 <div class="row justify-content-md-center">
     <div class="col-md-4 justify-content-md-center">
-        <form asp-action="Create">
+        <form asp-action="Search">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Prijs" class="control-label"></label>
-                <input asp-for="Prijs" class="form-control" />
+            <div class="form-group ">
+                <label asp-for="Prijs" class="control-label">Maximale prijs</label>
+                <input asp-for="Prijs" class="form-control" placeholder="€"/>
                 <span asp-validation-for="Prijs" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -28,27 +28,18 @@
                 <span asp-validation-for="Tijdstip" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Personen" class="control-label"></label>
-                <select asp-for="Personen" class="form-control">
-                    <option value="1">1 persoon</option>
-                    <option value="2">2 personen</option>
-                    <option value="3-4">3-4 personen</option>
-                    <option value=">4">>4 personen</option>
-                </select>
+                <label asp-for="Personen" class="control-label">Aantal personen</label>
+                <input asp-for="Personen" class="form-control" type="number" min="1" step="1"/>
                 <span asp-validation-for="Personen" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input asp-for="Status" type="hidden" class="form-control" value="Keuring" />
+                <input asp-for="Status" type="hidden" class="form-control" value="Goedgekeurd" />
                 <span asp-validation-for="Status" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Tijdduur" class="control-label">Tijds duur in uren</label>
+                <label asp-for="Tijdduur" class="control-label">Tijds duur in hele uren</label>
                 <input asp-for="Tijdduur" class="form-control" type="number" min="0.5" step="0.5"/>
                 <span asp-validation-for="Tijdduur" class="text-danger"></span>
-            </div>
-            <div class="form-group" id="button">
-                <textarea asp-for="Opdracht" class="form-control" placeholder="Schrijf hier de challenge opdracht..."></textarea>
-                <span asp-validation-for="Opdracht" class="text-danger"></span>
             </div>
             <div class="container">
                 <div class="row justify-content-md-center">
@@ -95,7 +86,7 @@
                 </div>
             </div>
             <div class="form-group text-center" id="button">
-                <input type="submit" value="Create" class="btn btn-primary " />
+                <input type="submit" value="Search" class="btn btn-primary " />
             </div>
         </form>
     </div>

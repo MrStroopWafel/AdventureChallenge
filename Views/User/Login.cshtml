@@ -19,19 +19,14 @@
                 <input asp-for="Wachtwoord" class="form-control" />
                 <span asp-validation-for="Wachtwoord" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group" id="button">
                 <input type="submit" value="Login" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 @Html.ValidationMessage("CustomError")
-<div>
-    
-        <!-- HttpContext.Session.GetString("user") != null ? <a asp-controller="Home" asp-action="Index">Terug naar Home</a> :   
-            Is het mogelijk om hier een shorthand if statement te maken die een knof kan weergeven op basis van een session?
-        --> 
-</div>
+
 
 @section Scripts {
     @{

@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
 using AdventureChallenge.Models;
 using Newtonsoft.Json;
+using System.Linq.Expressions;
 
 namespace AdventureChallenge.Controllers
 {
@@ -19,12 +20,12 @@ namespace AdventureChallenge.Controllers
         {
             _context = context;
         }
+
         // GET: Users
         public async Task<IActionResult> Index()
         {
             return View(await _context.Users.ToListAsync());
         }
-
 
         // User login
         public async Task<IActionResult> Login()
@@ -55,6 +56,19 @@ namespace AdventureChallenge.Controllers
             }
             return View("Login");
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         // GET: Users/Details/5
         public async Task<IActionResult> Details(int? id)

@@ -1,18 +1,63 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+}
+
+#introRegel {
+    margin-top: 120px;
+}
+
+.introimg {
+    width: 100px;
+}
+
+.img {
+    width: 500px;
+}
+
+#button {
+    margin-top: 10px;
+}
+
+#Beschrijving {
+    margin-top: 38px;
+}
+
+#Upload {
+    margin-top: 70px;
+}
+
+#icons {
+    margin-top: 50px;
+}
+
+.imageText {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+.middel-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#challengeInf {
+    padding-left: 50px;
 }
