@@ -5,7 +5,7 @@ namespace AdventureChallenge.Models
 {
     public partial class ChallengeHint
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public int ChallengeId { get; set; }
         public int HintId { get; set; }
 

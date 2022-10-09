@@ -13,12 +13,13 @@ namespace AdventureChallenge.Models.FormModels
             UserChallenges = new HashSet<UserChallenge>();
         }
 
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public decimal Prijs { get; set; }
         public string Tijdstip { get; set; }
         public int Personen { get; set; }
         public string Status { get; set; }
         public decimal Tijdduur { get; set; }
+        public string? Opdracht { get; set; }
         public bool Icon0 { get; set; }
         public bool Icon1 { get; set; }
         public bool Icon2 { get; set; }

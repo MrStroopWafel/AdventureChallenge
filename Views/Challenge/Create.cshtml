@@ -1,25 +1,24 @@
-﻿@model AdventureChallenge.Models.Challenge
+﻿@model AdventureChallenge.Models.FormModels.SearchForm 
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Search";
 }
 
-<h1>Create</h1>
+<h1 class="text-center">Maak een challenge voostel</h1>
 
-<h4>Challenge</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
+
+<div class="row justify-content-md-center">
+    <div class="col-md-4 justify-content-md-center">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Status" value="Keuring"/>
             <div class="form-group">
                 <label asp-for="Prijs" class="control-label"></label>
                 <input asp-for="Prijs" class="form-control" />
                 <span asp-validation-for="Prijs" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Tijdstip" class="control-label"></label>
+                <label asp-for="Tijdstip" class="control-label">Tijdstip uitvoering</label>
                 <select asp-for="Tijdstip" class="form-control">
                     <option value="'s Ochtends">'s Ochtends</option>
                     <option value="'s Middags">'s Middags</option>
@@ -38,33 +37,78 @@
                 </select>
                 <span asp-validation-for="Personen" class="text-danger"></span>
             </div>
-            <!--
             <div class="form-group">
-                <label asp-for="Status" class="control-label"></label>
-                <select asp-for="Status" class="form-control">
-                    <option value="Keuring">Keuring</option>
-                    <option value="Actief">Actief</option>
-                    <option value="Afgekeurd">Afgekeurd</option>
-                </select>
+                <input asp-for="Status" type="hidden" class="form-control" value="Keuring" />
                 <span asp-validation-for="Status" class="text-danger"></span>
             </div>
-            -->
             <div class="form-group">
                 <label asp-for="Tijdduur" class="control-label">Tijds duur in uren</label>
                 <input asp-for="Tijdduur" class="form-control" type="number" min="0.5" step="0.5"/>
                 <span asp-validation-for="Tijdduur" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="form-group" id="button">
+                <textarea asp-for="Opdracht" class="form-control" placeholder="Schrijf hier de challenge opdracht..."></textarea>
+                <span asp-validation-for="Opdracht" class="text-danger"></span>
+            </div>
+            <div class="container">
+                <div class="row justify-content-md-center">
+                    <div class="form-group form-check col-3">
+                        <label class="form-check-label" asp-for="Icon0"><i class="fa-solid fa-person-hiking" id="Icon0"></i></label>
+                        <input class="form-check-input" asp-for="Icon0"id="checkbox"/>
+                    </div>
+                    <div class="form-group form-check col-3">
+                        <label class="form-check-label" asp-for="Icon1"><i class="fa-solid fa-handshake-angle" id="Icon1"></i></label>
+                        <input class="form-check-input" asp-for="Icon1"id="checkbox"/>
+                    </div>
+                    <div class="form-group form-check col-3">
+                        <label class="form-check-label" asp-for="Icon2"><i class="fa-solid fa-bus" id="Icon2"></i></label>
+                        <input class="form-check-input" asp-for="Icon2"id="checkbox"/>
+                    </div>
+                </div>
+                <div class="row justify-content-md-center">
+                    <div class="form-group form-check col-3">
+                        <label class="form-check-label" asp-for="Icon3"><i class="fa-solid fa-stopwatch"></i></label>
+                        <input class="form-check-input" asp-for="Icon3" id="checkbox"/>
+                    </div>
+                    <div class="form-group form-check col-3">
+                        <label class="form-check-label" asp-for="Icon4"><i class="fa-solid fa-otter" id="Icon4"></i></label>
+                        <input class="form-check-input" asp-for="Icon4" id="checkbox"/>
+                    </div>
+                    <div class="form-group form-check col-3">
+                        <label class="form-check-label" asp-for="Icon5"><i class="fa-solid fa-spoon" id="Icon5"></i></label>
+                        <input class="form-check-input" asp-for="Icon5"/>
+                    </div>
+                </div>
+                <div class="row justify-content-md-center">
+                    <div class="form-group form-check col-3">
+                        <label class="form-check-label" asp-for="Icon6"><i class="fa-solid fa-temperature-arrow-down" id="Icon6"></i></label>
+                        <input class="form-check-input" asp-for="Icon6"/>
+                    </div>
+                    <div class="form-group form-check col-3">
+                        <label class="form-check-label" asp-for="Icon7"><i class="fa-solid fa-temperature-arrow-up" id="Icon7"></i></label>
+                        <input class="form-check-input" asp-for="Icon7"/>
+                    </div>
+                    <div class="form-group form-check col-3">
+                        <label class="form-check-label" asp-for="Icon8"><i class="fa-solid fa-brain" id="Icon8"></i></label>
+                        <input class="form-check-input" asp-for="Icon8"/>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group text-center" id="button">
+                <input type="submit" value="Create" class="btn btn-primary " />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+@Html.ValidationMessage("CustomError")
+
+<div class="row justify-content-md-center">
+    <a asp-controller="Home" asp-action="Index" class="text-center">Back to Home</a>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

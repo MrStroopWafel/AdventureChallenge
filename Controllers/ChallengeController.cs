@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using AdventureChallenge.Models;
 using Newtonsoft.Json;
 using AdventureChallenge.Models.FormModels;
+using System.Drawing;
+using System.Linq.Expressions;
 
 namespace AdventureChallenge.Controllers
 {
@@ -141,31 +143,28 @@ namespace AdventureChallenge.Controllers
         {
             var user = JsonConvert.DeserializeObject<User>(HttpContext.Session.GetString("user"));
             string beschrijving = challengeForm.Beschrijving;
-            //System.Drawing.Image afbeelding = challengeForm.Image;
             var userChallenge = await _context.UserChallenges.FirstOrDefaultAsync(m => m.UserId == user.Id && m.ChallengeId == challengeForm.ChallengeId && m.Afgerond == false);
-            /*
-            var userChallenge = new UserChallenge
-            {
-                UserId = user.Id,
-                ChallengeId = challengeForm.ChallengeId,
-                Beschrijving = challengeForm.Beschrijving,
-                Afgerond = true
-            };
-            */
-            userChallenge.Beschrijving = challengeForm.Beschrijving;
-            userChallenge.Afgerond = true;
-            //userChallenge.Foto = challengeForm.Foto;
 
-            try
+            if (challengeForm.Beschrijving != null)
             {
-                _context.Update(userChallenge);
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                throw;
-            }
+                userChallenge.Beschrijving = challengeForm.Beschrijving;
+                userChallenge.Afgerond = true;
+                //userChallenge.Foto = challengeForm.Foto;
 
+                try
+                {
+                    _context.Update(userChallenge);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    throw;
+                }
+            }
+            else
+            {
+                return View(challengeForm);
+            }
             return RedirectToAction("Index", "Home");
         }
 
@@ -224,16 +223,73 @@ namespace AdventureChallenge.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Prijs,Tijdstip,Personen,Status,Tijdduur")] Challenge challenge)
+        public async Task<IActionResult> Create([Bind("Prijs,Tijdstip,Personen,Status,Tijdduur,Opdracht")] Challenge challenge, bool Icon0, bool Icon1, bool Icon2, bool Icon3, bool Icon4, bool Icon5, bool Icon6, bool Icon7, bool Icon8)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(challenge);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                //return RedirectToAction(nameof(Index));
+                List<bool> hints = new List<bool> { Icon0, Icon1, Icon2, Icon3, Icon4, Icon5, Icon6, Icon7, Icon8 };
+                List<string> hintNames = new List<string> { };
+                int i = 0;
+                foreach (var hint in hints)
+                {
+                    if (hint)
+                    {
+                        switch (i)
+                        {
+                            case 0:
+                                _context.Add(new ChallengeHint { ChallengeId = challenge.Id, HintId = 1 });
+                                await _context.SaveChangesAsync();
+                                break;
+                            case 1:
+                                _context.Add(new ChallengeHint { ChallengeId = challenge.Id, HintId = 2 });
+                                await _context.SaveChangesAsync();
+                                break;
+                            case 2:
+                                _context.Add(new ChallengeHint { ChallengeId = challenge.Id, HintId = 5 });
+                                await _context.SaveChangesAsync();
+                                break;
+                            case 3:
+                                _context.Add(new ChallengeHint { ChallengeId = challenge.Id, HintId = 6 });
+                                await _context.SaveChangesAsync();
+                                break;
+                            case 4:
+                                _context.Add(new ChallengeHint { ChallengeId = challenge.Id, HintId = 7 });
+                                await _context.SaveChangesAsync();
+                                break;
+                            case 5:
+                                _context.Add(new ChallengeHint { ChallengeId = challenge.Id, HintId = 8 });
+                                await _context.SaveChangesAsync();
+                                break;
+                            case 6:
+                                _context.Add(new ChallengeHint { ChallengeId = challenge.Id, HintId = 9 });
+                                await _context.SaveChangesAsync();
+                                break;
+                            case 7:
+                                _context.Add(new ChallengeHint { ChallengeId = challenge.Id, HintId = 10 });
+                                await _context.SaveChangesAsync();
+                                break;
+                            case 8:
+                                _context.Add(new ChallengeHint { ChallengeId = challenge.Id, HintId = 11 });
+                                await _context.SaveChangesAsync();
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    i++;
+                }
+                return RedirectToAction("Index", "Home");
             }
             return View(challenge);
         }
+
+
+
+
+
 
 
 
@@ -249,7 +305,6 @@ namespace AdventureChallenge.Controllers
             {
                 return NotFound();
             }
-
             var challenge = await _context.Challenges.FindAsync(id);
             if (challenge == null)
             {
@@ -263,7 +318,7 @@ namespace AdventureChallenge.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Prijs,Tijdstip,Personen,Status,Tijdduur")] Challenge challenge)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Prijs,Tijdstip,Personen,Status,Tijdduur,Opdracht")] Challenge challenge)
         {
             if (id != challenge.Id)
             {

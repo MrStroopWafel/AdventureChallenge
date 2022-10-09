@@ -45,11 +45,11 @@
 
             <div class="col justify-content-md-center">
                 <div class="row form-group">
-                    <textarea asp-for="Beschrijving" class="form-control" placeholder="geef hier een korte samenvatting..."></textarea>
+                    <textarea asp-for="Beschrijving" class="form-control" placeholder="geef hier een korte samenvatting..." required></textarea>
                     <span asp-validation-for="Beschrijving" class="text-danger"></span>
                 </div>
                 <div class="row-md-auto">
-                    <input asp-for="Foto" class="form-control" type="file" id="Upload">
+                    <input asp-for="Foto" class="form-control" type="file" id="Upload" required>
                 </div>
             </div>
         </div>

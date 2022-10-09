@@ -49,8 +49,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="Tijdduur" class="control-label">Tijds duur in uren</label>
-                <input asp-for="Tijdduur" class="form-control" type="number" min="0.5" step="0.5"/>
+                <input asp-for="Tijdduur" class="form-control" type="number" min="0.50" step="0.5"/>
                 <span asp-validation-for="Tijdduur" class="text-danger"></span>
+            </div>
+            <div class="form-group" id="button">
+                <textarea asp-for="Opdracht" class="form-control" placeholder="Schrijf hier de challenge opdracht..."></textarea>
+                <span asp-validation-for="Opdracht" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
