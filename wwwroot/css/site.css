@@ -26,7 +26,7 @@ body {
 }
 
 .img {
-    width: 400px;
+    width: 500px;
 }
 
 #button {
@@ -43,4 +43,21 @@ body {
 
 #icons {
     margin-top: 50px;
+}
+
+.imageText {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+.middel-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#challengeInf {
+    padding-left: 50px;
 }

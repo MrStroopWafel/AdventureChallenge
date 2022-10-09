@@ -43,7 +43,7 @@ namespace AdventureChallenge.Controllers
         //Post data from the search form
         [HttpPost, ActionName("Search")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Search([Bind("Id,Prijs,Tijdstip,Personen,Status,Tijdduur,Icon0,Icon1,Icon2,Icon3,Icon4,Icon5,Icon6,Icon7,Icon8")] SearchForm searchForm)
+        public async Task<IActionResult> Search([Bind("Id,Prijs,Tijdstip,Personen,Status,Tijdduur,Opdracht,Icon0,Icon1,Icon2,Icon3,Icon4,Icon5,Icon6,Icon7,Icon8")] SearchForm searchForm)
         {
             //checks if all data is given
             if (ModelState.IsValid)
@@ -79,9 +79,11 @@ namespace AdventureChallenge.Controllers
                 {
                     var user = JsonConvert.DeserializeObject<User>(HttpContext.Session.GetString("user"));
                     //creates a userChallenge 
-                    var userChallenge = new UserChallenge { Id = 0, UserId = user.Id, ChallengeId = challenge.Id, Beschrijving = null, FotoId = null, Afgerond = false };
+                    var userChallenge = new UserChallenge { UserId = user.Id, ChallengeId = challenge.Id, Beschrijving = null, FotoId = null, Afgerond = false };
                     _context.Add(userChallenge);
                     _context.SaveChanges();
+                    int userChallengeId = (int)userChallenge.Id;
+
                     return RedirectToAction("Details", "Challenge", new { challenge.Id });
                 }
             }
@@ -128,25 +130,32 @@ namespace AdventureChallenge.Controllers
             {
                 return NotFound();
             }
-            var ChallengeForm = new ChallengeForm { Id = challenge.Id, Prijs = challenge.Prijs, Tijdstip = challenge.Tijdstip, Personen = challenge.Personen, Status = challenge.Status, Tijdduur = challenge.Tijdduur, hints = hintList };
+            var ChallengeForm = new ChallengeForm { ChallengeId = challenge.Id, Prijs = challenge.Prijs, Tijdstip = challenge.Tijdstip, Personen = challenge.Personen, Status = challenge.Status, Tijdduur = challenge.Tijdduur, Opdracht = challenge.Opdracht, Hints = hintList, Afgerond = true };
 
             return View(ChallengeForm);
         }
         //Post data from the search form
         [HttpPost, ActionName("Details")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Details([Bind("Id,Prijs,Tijdstip,Personen,Tijdduur,hints,Beschrijving,Image")] ChallengeForm challengeForm)
+        public async Task<IActionResult> Details([Bind("ChallengeId,Prijs,Tijdstip,Personen,Tijdduur,Opdracht,Hints,Beschrijving,Afgerond,Foto")] ChallengeForm challengeForm)
         {
             var user = JsonConvert.DeserializeObject<User>(HttpContext.Session.GetString("user"));
             string beschrijving = challengeForm.Beschrijving;
             //System.Drawing.Image afbeelding = challengeForm.Image;
+            var userChallenge = await _context.UserChallenges.FirstOrDefaultAsync(m => m.UserId == user.Id && m.ChallengeId == challengeForm.ChallengeId && m.Afgerond == false);
+            /*
             var userChallenge = new UserChallenge
             {
                 UserId = user.Id,
-                ChallengeId = challengeForm.Id,
+                ChallengeId = challengeForm.ChallengeId,
                 Beschrijving = challengeForm.Beschrijving,
                 Afgerond = true
             };
+            */
+            userChallenge.Beschrijving = challengeForm.Beschrijving;
+            userChallenge.Afgerond = true;
+            //userChallenge.Foto = challengeForm.Foto;
+
             try
             {
                 _context.Update(userChallenge);
@@ -159,7 +168,6 @@ namespace AdventureChallenge.Controllers
 
             return RedirectToAction("Index", "Home");
         }
-
 
 
 

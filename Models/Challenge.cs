@@ -19,6 +19,7 @@ namespace AdventureChallenge.Models
         public string Personen { get; set; }
         public string Status { get; set; }
         public decimal Tijdduur { get; set; }
+        public string Opdracht { get; set; }
 
         public virtual ICollection<ChallengeHint> ChallengeHints { get; set; }
         public virtual ICollection<UserChallenge> UserChallenges { get; set; }

@@ -1,6 +1,6 @@
 ﻿namespace AdventureChallenge.Models.FormModels
 {
-    public class ChallengeForm
+    public class ChallengeForm : UserChallenge
     {
         public ChallengeForm()
         {
@@ -8,15 +8,14 @@
             UserChallenges = new HashSet<UserChallenge>();
         }
 
-        public int Id { get; set; }
         public decimal Prijs { get; set; }
         public string Tijdstip { get; set; }
         public string Personen { get; set; }
         public string Status { get; set; }
         public decimal Tijdduur { get; set; }
-        public string Beschrijving { get; set; }
-        public System.Drawing.Image? Image { get; set; }
-        public List<Hint>? hints { get; set; }
+        public string Opdracht { get; set; }
+
+        public List<Hint>? Hints { get; set; }
 
         public virtual ICollection<ChallengeHint> ChallengeHints { get; set; }
         public virtual ICollection<UserChallenge> UserChallenges { get; set; }

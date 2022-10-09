@@ -11,24 +11,30 @@
 <div class="container" id="icons">
     <form asp-action="Details">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="ChallengeId" />
         <input type="hidden" asp-for="Prijs" />
         <input type="hidden" asp-for="Tijdstip" />
         <input type="hidden" asp-for="Personen" />
         <input type="hidden" asp-for="Tijdduur" />
-        <input type="hidden" asp-for="hints" />
+        <input type="hidden" asp-for="Opdracht" />
+        <input type="hidden" asp-for="Hints" />
+        <input type="hidden" asp-for="UserId" />
+        <input type="hidden" asp-for="Afgerond" />
         <div class="row justify-content-md-center">
             <div class="col" id="box">
-                <p class="text-left">€@Model?.Prijs - @Model?.Tijdstip - @Model?.Tijdduur uur - @Model?.Personen deelnemer(s)</p>
+                <p class="text-left" id="challengeInf">€@Model?.Prijs - @Model?.Tijdstip - @Model?.Tijdduur uur - @Model?.Personen deelnemer(s)</p>
                 <div class="row">
-                    <img class="img" src="~/img/black-square.jpg">
+                    <div class="imageText">
+                        <img class="img" src="~/img/black-square.jpg"> 
+                        <p class="middel-text">@Model?.Opdracht</p>
+                    </div>
                 </div>
 
             </div>
             
             <div class="col-1" id="icons">
                 @{
-                    foreach (var hint in Model.hints)
+                    foreach (var hint in Model.Hints)
                     {
                                 <div class="row-sm-2">
                                     <i class="@hint.FontIcoon"></i>
@@ -43,7 +49,7 @@
                     <span asp-validation-for="Beschrijving" class="text-danger"></span>
                 </div>
                 <div class="row-md-auto">
-                    <input asp-for="Image" class="form-control" type="file" id="Upload">
+                    <input asp-for="Foto" class="form-control" type="file" id="Upload">
                 </div>
             </div>
         </div>
